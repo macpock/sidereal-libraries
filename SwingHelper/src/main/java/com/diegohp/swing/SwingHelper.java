@@ -11,14 +11,21 @@ import javax.swing.filechooser.FileFilter;
  * This class brings some shortcuts of Swing User-Interface components.
  *
  * @author diegohp (Diego Hernandez Perez) - <a href="mailto:hp.diego@gmail.com">hp.diego@gmail.com</a>
- * @version 1.0
+ * @version 1.1
  */
 public final class SwingHelper {
     
+    /**
+     * Setting the look and feel to be the System one as default.
+     */
     static{
-        SwingHelper.setLookAndFeel(LookAndFeel.MOTIF);
+        SwingHelper.setLookAndFeel(LookAndFeel.SYSTEM);
     }
     
+    /**
+     * Enum listing the look and feel types.
+     * @since 1.1
+     */
     public enum LookAndFeel{
         /**
          * The main default Java look and feel. Present on all OS.
@@ -69,15 +76,16 @@ public final class SwingHelper {
     }
     
     /**
-     * Set the look and feel of the app.
+     * Set the look and feel of the current app.
      * <p/>
      * If you want to change the look and feel once the UI was displayed, invoke the following methods for each top-level container:
+     * <br/>
      * <code>
      * SwingUtilities.updateComponentTreeUI(yourFrame);<br/>
      * yourFrame.pack();
      * </code>
      * 
-     * @param lookAndFeel 
+     * @param lookAndFeel One of the options listed on {@link LookAndFeel}.
      */
     public static void setLookAndFeel(LookAndFeel lookAndFeel){
         try {
@@ -124,11 +132,10 @@ public final class SwingHelper {
     }
 
     /**
-     * Displays a {@link JOptionPane} as an Input Dialog asking for a required
-     * text.
+     * Displays a {@link JOptionPane} as an Input Dialog asking for a required text.
      *
      * @param title The title of the dialog.
-     * @return
+     * @return The text written by the user.
      */
     public static String askForRequiredTextUsingInputDialog(String title, String message) {
         String text = null;
@@ -143,7 +150,7 @@ public final class SwingHelper {
      *
      * @param title The title of the dialog.
      * @param startDirectory The directory where the dialog is initialed opened.
-     * @return The {@link File} object selected, returns null if no directory was selected.
+     * @return The {@link File} selected, returns null if no directory was selected.
      */
     public static File chooseDirectory(String title, String startDirectory) {
         JFileChooser chooser = new JFileChooser();
@@ -168,7 +175,7 @@ public final class SwingHelper {
      *
      * @param title The title of the dialog.
      * @param startDirectory The directory where the dialog is initialed opened.
-     * @return The {@link File} object selected, returns null if no directory was selected.
+     * @return The {@link File} selected, returns null if no directory was selected.
      */
     public static File chooseDirectory(String title, File startDirectory) {
         JFileChooser chooser = new JFileChooser();
@@ -192,7 +199,7 @@ public final class SwingHelper {
      * Displays a {@link JFileChooser} to select a directory.
      *
      * @param title The title of the dialog.
-     * @return The {@link File} object selected, returns null if no directory was selected.
+     * @return The {@link File} selected, returns null if no directory was selected.
      */
     public static File chooseDirectory(String title) {
         return chooseDirectory(title, "");
@@ -205,10 +212,8 @@ public final class SwingHelper {
      * @param startDirectory The directory where the dialog is initialed opened.
      * @param fileExtension File extension to filter each content of the opened
      * directories. Example ".xml".
-     * @param startFile The preselected file where the dialog is initialed
-     * opened.
-     * @return The {@link File} object selected, returns null if no file was
-     * selected.
+     * @param startFile The preselected file where the dialog is initialed opened.
+     * @return The {@link File} object selected, returns null if no file was selected.
      */
     public static File chooseFile(String title, String startDirectory, final String fileExtension, String startFile) {
         JFileChooser chooser = new JFileChooser();
@@ -267,10 +272,8 @@ public final class SwingHelper {
      * Displays a {@link JFileChooser} to select a file.
      *
      * @param title The title of the dialog.
-     * @param fileExtension File extension to filter each content of the opened
-     * directories. Example ".xml".
-     * @return The {@link File} object selected, returns null if no file was
-     * selected.
+     * @param fileExtension File extension to filter each content of the opened directories. Example ".xml".
+     * @return The {@link File} object selected, returns null if no file was selected.
      */
     public static File chooseFile(String title, String fileExtension) {
         return chooseFile(title, null, fileExtension, null);
@@ -280,10 +283,8 @@ public final class SwingHelper {
      * Displays a {@link JFileChooser} to select a file.
      *
      * @param title The title of the dialog.
-     * @param fileExtension File extension to filter each content of the opened
-     * directories. Example ".xml".
-     * @return The {@link File} object selected, returns null if no file was
-     * selected.
+     * @param fileExtension File extension to filter each content of the opened directories. Example ".xml".
+     * @return The {@link File} object selected, returns null if no file was selected.
      */
     public static File chooseFile(String title, String fileExtension, String startFile) {
         return chooseFile(title, null, fileExtension, startFile);
