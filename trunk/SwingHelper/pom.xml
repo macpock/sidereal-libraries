@@ -1,20 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.diegohp.swing</groupId>
-  <artifactId>SwingHelper</artifactId>
-  <version>1.1</version>
-  <packaging>jar</packaging>
+    <groupId>com.diegohp.swing</groupId>
+    <artifactId>SwingHelper</artifactId>
+    <version>1.1</version>
+    <packaging>jar</packaging>
 
-  <name>SwingHelper</name>
-  <url>http://www.diegohp.com</url>
+    <name>SwingHelper</name>
+    <url>http://www.diegohp.com</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+    <properties> 
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
   
-  <build>
+    <build>
         <plugins>
             
             <plugin>
@@ -79,14 +79,13 @@
         </plugins>
     </build>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-    <description>SwingHelper is a library with useful classes and methods to manipulate UI from Swing.
-Created by diegohp (hp.diego@gmail.com)</description>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <description>SwingHelper is a library with useful classes and methods to manipulate UI from Swing. Created by diegohp (hp.diego@gmail.com)</description>
 </project>

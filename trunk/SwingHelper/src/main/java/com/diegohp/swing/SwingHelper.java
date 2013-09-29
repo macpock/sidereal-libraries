@@ -4,6 +4,7 @@ package com.diegohp.swing;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.filechooser.FileFilter;
 
 /**
@@ -13,6 +14,84 @@ import javax.swing.filechooser.FileFilter;
  * @version 1.0
  */
 public final class SwingHelper {
+    
+    static{
+        SwingHelper.setLookAndFeel(LookAndFeel.MOTIF);
+    }
+    
+    public enum LookAndFeel{
+        /**
+         * The main default Java look and feel. Present on all OS.
+         */
+        METAL("javax.swing.plaf.metal.MetalLookAndFeel"),
+        /**
+         * One of the default Java look and feels. Present on all OS.
+         */
+        NIMBUS("javax.swing.plaf.nimbus.NimbusLookAndFeel"), 
+        /**
+         * One of the default Java look and feels. Present on all OS.
+         */
+        MOTIF("com.sun.java.swing.plaf.motif.MotifLookAndFeel"),
+        /**
+         * Windows look and feel, the theme depends on the version (XP, Vista, 7, 8).
+         * Only present on Windows OS.
+         */
+        WINDOWS("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"),
+        /**
+         * A classic windows look ad feel. Only present on Windows OS.
+         */
+        WINDOWS_CLASSIC("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel"),
+        /**
+         * Mac OSX look and feel. Only present on MAC OS.
+         */
+        MAC("com.apple.laf.AquaLookAndFeel"),
+        /**
+         * GTK+ look and feel. Present on all OS except Windows.
+         */
+        GTK("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"),
+        /**
+         * Uses the native look and feel of the host OS.
+         */
+        SYSTEM(UIManager.getSystemLookAndFeelClassName());
+        
+        private String lookAndFeelClass;
+        
+        private LookAndFeel(String lookAndFeelClass){
+            this.lookAndFeelClass = lookAndFeelClass;
+        }
+
+        /**
+         * @return the lookAndFeel
+         */
+        public String getLookAndFeelClass() {
+            return lookAndFeelClass;
+        }
+    }
+    
+    /**
+     * Set the look and feel of the app.
+     * <p/>
+     * If you want to change the look and feel once the UI was displayed, invoke the following methods for each top-level container:
+     * <code>
+     * SwingUtilities.updateComponentTreeUI(yourFrame);<br/>
+     * yourFrame.pack();
+     * </code>
+     * 
+     * @param lookAndFeel 
+     */
+    public static void setLookAndFeel(LookAndFeel lookAndFeel){
+        try {
+            javax.swing.UIManager.setLookAndFeel(lookAndFeel.getLookAndFeelClass());
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(SwingHelper.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(SwingHelper.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(SwingHelper.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(SwingHelper.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * Displays a {@link JOptionPane} as an error message.
