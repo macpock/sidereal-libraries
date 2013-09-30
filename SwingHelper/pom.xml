@@ -14,6 +14,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
   
+    <repositories>
+        <!--other repositories if any-->
+        <repository>
+            <id>project.local</id>
+            <name>project</name>
+            <url>file:${project.basedir}/repo</url>
+        </repository>
+    </repositories>
+  
     <build>
         <plugins>
             
@@ -84,6 +93,18 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.swinglabs</groupId>
+            <artifactId>swing-layout</artifactId>
+            <version>1.0.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bolet</groupId>
+            <artifactId>jgz</artifactId>
+            <version>0.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
