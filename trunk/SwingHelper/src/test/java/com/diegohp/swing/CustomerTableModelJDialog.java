@@ -22,6 +22,7 @@ public class CustomerTableModelJDialog extends javax.swing.JDialog {
     public CustomerTableModelJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        SwingHelper.centerWindow(this);
         
         this.customersListTableModel = new ListTableModel<Customer>() {
 
@@ -34,6 +35,9 @@ public class CustomerTableModelJDialog extends javax.swing.JDialog {
                 if (col == 1) {
                     return customer.getName();
                 }
+                if (col == 2) {
+                    return customer.getViews();
+                }
                 return customer.getId() + " -> " + customer.getName();
             }
         };
@@ -41,6 +45,7 @@ public class CustomerTableModelJDialog extends javax.swing.JDialog {
         List<String> columnsNames = new ArrayList<String>();
         columnsNames.add("Id");
         columnsNames.add("Name");
+        columnsNames.add("Views");
         this.customersListTableModel.setColumnNames(columnsNames);
         
         
@@ -52,6 +57,8 @@ public class CustomerTableModelJDialog extends javax.swing.JDialog {
                     ListSelectionModel model = jTableCustomers.getSelectionModel();
                     if(model.getLeadSelectionIndex() >= 0){
                         customerSelected = ((ListTableModel<Customer>)jTableCustomers.getModel()).getObjectAt(model.getLeadSelectionIndex());
+                        customerSelected.setViews(customerSelected.getViews() + 1);
+                        customersListTableModel.fireTableDataChanged();
                         SwingHelper.showInformationMessage("Clicked on a Customer", "Customer's Id is " + customerSelected.getId() + " and name is " + customerSelected.getName());
                     }
                 }
@@ -65,10 +72,12 @@ public class CustomerTableModelJDialog extends javax.swing.JDialog {
         Customer c1 = new Customer();
         c1.setId(123456789L);
         c1.setName("Harry Mason");
+        c1.setViews(0);
         
         Customer c2 = new Customer();
         c2.setId(987654321L);
         c2.setName("James Sunderland");
+        c2.setViews(0);
         
         customers.add(c1);
         customers.add(c2);
@@ -88,9 +97,11 @@ public class CustomerTableModelJDialog extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCustomers = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jTableCustomers.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTableCustomers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -102,22 +113,31 @@ public class CustomerTableModelJDialog extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableCustomers.setIntercellSpacing(new java.awt.Dimension(4, 4));
         jScrollPane1.setViewportView(jTableCustomers);
+
+        jLabel1.setText("Click on any of the names: (close this window when finished)");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -166,6 +186,7 @@ public class CustomerTableModelJDialog extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableCustomers;
     // End of variables declaration//GEN-END:variables

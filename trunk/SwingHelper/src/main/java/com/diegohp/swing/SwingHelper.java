@@ -1,8 +1,12 @@
 
 package com.diegohp.swing;
 
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.io.File;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileFilter;
@@ -126,6 +130,16 @@ public final class SwingHelper {
         SwingHelper.setLookAndFeel(LookAndFeel.METAL);
         if(metalTheme == MetalTheme.DEFAULT_METAL) MetalLookAndFeel.setCurrentTheme(new DefaultMetalTheme());
         if(metalTheme == MetalTheme.OCEAN) MetalLookAndFeel.setCurrentTheme(new OceanTheme());
+    }
+    
+    /**
+     * Centers a {@link Window} at the center of the screen.<br/>
+     * Windows like {@link JDialog} and {@link JFrame} (and others) that extend from {@link Window} applies for this method.
+     * 
+     * @param window 
+     */
+    public static void centerWindow(Window window){
+         window.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width)/2 - window.getWidth()/2, (Toolkit.getDefaultToolkit().getScreenSize().height)/2 - window.getHeight()/2);
     }
 
     /**
@@ -347,16 +361,5 @@ public final class SwingHelper {
      */
     public static File chooseFile(String title, String fileExtension) {
         return chooseFile(title, null, fileExtension, null);
-    }
-
-    /**
-     * Displays a {@link JFileChooser} to select a file.
-     *
-     * @param title The title of the dialog.
-     * @param fileExtension File extension to filter each content of the opened directories. Example ".xml".
-     * @return The {@link File} object selected, returns null if no file was selected.
-     */
-    public static File chooseFile(String title, String fileExtension, String startFile) {
-        return chooseFile(title, null, fileExtension, startFile);
     }
 }
