@@ -1,6 +1,7 @@
 package com.diegohp.swing;
 
 import com.diegohp.swing.ListComboBoxModel;
+import java.awt.Toolkit;
 import java.util.Locale;
 import javax.swing.UIManager;
 
@@ -37,6 +38,7 @@ public class LanguageSelectorJDialog extends javax.swing.JDialog {
         }
         
         initComponents();
+        SwingHelper.centerWindow(this);
     }
 
     /**

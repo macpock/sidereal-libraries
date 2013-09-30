@@ -13,7 +13,7 @@ public class Customer {
     
     private Long id;
     private String name;
-    
+    private Integer views;
     
 
     /**
@@ -42,6 +42,20 @@ public class Customer {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the views
+     */
+    public int getViews() {
+        return views;
+    }
+
+    /**
+     * @param views the views to set
+     */
+    public void setViews(Integer views) {
+        this.views = views;
     }
     
     

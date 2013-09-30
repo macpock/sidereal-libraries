@@ -42,13 +42,13 @@ public class SwingHelperTest {
         testShowConfirmationDialogWithOkCancelButtonsOK();
         testShowConfirmationDialogWithOkCancelButtonsCANCEL();
         testAskForRequiredTextUsingInputDialog();
+        
         testChooseDirectory_String_String();
-        testChooseDirectory_String_File();
+        //testChooseDirectory_String_File();
         testChooseDirectory_String();
         testChooseFile_4args();
         testChooseFile_String();
-        testChooseFile_String_String();
-        testChooseFile_3args();
+        //testChooseFile_String_String();
         testSetLookAndFeel();
     }
 
@@ -147,7 +147,7 @@ public class SwingHelperTest {
 
     public void testChooseFile_String() {
         System.out.println("chooseFile");
-        File result = SwingHelper.chooseFile("Choose a file");
+        File result = SwingHelper.chooseFile("Choose any file");
         assertNotNull("The file selected was null", result);
     }
 
@@ -156,15 +156,6 @@ public class SwingHelperTest {
         String title = "Choose file";
         String fileExtension = ".txt";
         File result = SwingHelper.chooseFile(title, fileExtension);
-        assertNotNull("The file selected was null", result);
-    }
-
-    public void testChooseFile_3args() {
-        System.out.println("chooseFile");
-        String title = "Choose a file";
-        String fileExtension = ".xml";
-        String startFile = "target/test-classes/com/diegohp/swing/";
-        File result = SwingHelper.chooseFile(title, fileExtension, startFile);
         assertNotNull("The file selected was null", result);
     }
     
