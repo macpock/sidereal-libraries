@@ -6,6 +6,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.plaf.metal.DefaultMetalTheme;
+import javax.swing.plaf.metal.MetalLookAndFeel;
+import javax.swing.plaf.metal.OceanTheme;
 
 /**
  * This class brings some shortcuts of Swing User-Interface components.
@@ -76,6 +79,17 @@ public final class SwingHelper {
     }
     
     /**
+     * Enum listing the Metal themes..
+     * @since 1.1
+     */
+    public enum MetalTheme{
+        DEFAULT_METAL,
+        OCEAN;
+        
+        private MetalTheme(){}
+    }
+    
+    /**
      * Set the look and feel of the current app.
      * <p/>
      * If you want to change the look and feel once the UI was displayed, invoke the following methods for each top-level container:
@@ -99,6 +113,19 @@ public final class SwingHelper {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(SwingHelper.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+    }
+    
+    /**
+     * Set the theme for the Metal look and feel.<br/>
+     * This method calls {@link #setLookAndFeel(com.diegohp.swing.SwingHelper.LookAndFeel)} with {@link LookAndFeel#METAL} to set the Metal look and feel.<br/>
+     * The Metal look  and feel is required to use these themes.
+     * 
+     * @param metalTheme One of the options listed on {@link MetalTheme}.
+     */
+    public static void setMetalTheme(MetalTheme metalTheme){
+        SwingHelper.setLookAndFeel(LookAndFeel.METAL);
+        if(metalTheme == MetalTheme.DEFAULT_METAL) MetalLookAndFeel.setCurrentTheme(new DefaultMetalTheme());
+        if(metalTheme == MetalTheme.OCEAN) MetalLookAndFeel.setCurrentTheme(new OceanTheme());
     }
 
     /**
@@ -143,6 +170,49 @@ public final class SwingHelper {
             text = JOptionPane.showInputDialog(null, message, title, JOptionPane.QUESTION_MESSAGE);
         }
         return text;
+    }
+    
+    /**
+     * Displays a {@link JOptionPane} as a Confirm Dialog with YES and NO buttons.
+     * 
+     * @param title The title of the Dialog.
+     * @param message The message of the Dialog.
+     * @return "yes" or "no" if clicked on the respective buttons.
+     */
+    public static String showConfirmationDialogWithYesNoButtons(String title, String message){
+        int result = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(result == JOptionPane.YES_OPTION) return "yes";
+        if(result == JOptionPane.NO_OPTION) return "no";
+        return null;
+    }
+    
+    /**
+     * Displays a {@link JOptionPane} as a Confirm Dialog with YES, NO and CANCEL buttons.
+     * 
+     * @param title The title of the Dialog.
+     * @param message The message of the Dialog.
+     * @return "yes" or "no" or "cancel" if clicked on the respective buttons.
+     */
+    public static String showConfirmationDialogWithYesNoCancelButtons(String title, String message){
+        int result = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(result == JOptionPane.YES_OPTION) return "yes";
+        if(result == JOptionPane.NO_OPTION) return "no";
+        if(result == JOptionPane.CANCEL_OPTION) return "cancel";
+        return null;
+    }
+    
+    /**
+     * Displays a {@link JOptionPane} as a Confirm Dialog with OK and CANCEL buttons.
+     * 
+     * @param title The title of the Dialog.
+     * @param message The message of the Dialog.
+     * @return "ok" or "cancel" if clicked on the respective buttons.
+     */
+    public static String showConfirmationDialogWithOkCancelButtons(String title, String message){
+        int result = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(result == JOptionPane.OK_OPTION) return "ok";
+        if(result == JOptionPane.CANCEL_OPTION) return "cancel";
+        return null;
     }
 
     /**
